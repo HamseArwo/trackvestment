@@ -5,8 +5,32 @@
     box-sizing: border-box;
 }
 
+:root {
+    --accent: #0cc95b;
+    --main: #121212;
+}
+
+button {
+    border-radius: 8px;
+    color: #fff;
+    font-weight: bold;
+    border: 1px solid transparent;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    background-color: var(--accent);
+    cursor: pointer;
+    transition:
+        background-color,
+        color 0.25s ease-in;
+}
+button:hover {
+    background-color: var(--main);
+    color: var(--accent);
+    border-color: var(--accent);
+}
+
 .highlight {
-    color: #32453a;
+    color: var(--accent);
     font-weight: bold;
 }
 .nav-container {
@@ -35,7 +59,7 @@
 }
 
 .nav-bar ul li a:hover {
-    color: #32453a;
+    color: var(--accent);
 }
 .nav-logo {
     width: 50px;
@@ -50,8 +74,9 @@
 .hero {
     display: flex;
     justify-content: space-around;
-    align-items: center;
+    /*align-items: center;*/
     height: 100vh;
+    width: 100%;
 }
 .hero-image {
     width: 500px;
@@ -62,9 +87,36 @@
     height: 100%;
 }
 .hero-text h1 {
-    color: #32453a;
+    color: var(--accent);
     font-weight: bold;
     margin: 0px;
+    font-size: 70px;
+}
+.hero-text h2 {
+    text-align: left;
+}
+.hero-text {
+    padding-top: 125px;
+}
+.hero-btn {
+    display: flex;
+    width: 100%;
+    margin-top: 15px;
+    /*justify-content: space-between;*/
+}
+.learn-btn {
+    margin-left: 15px;
+    background-color: var(--main);
+    color: var(--accent);
+    border-color: var(--accent);
+}
+
+.learn-btn:hover {
+    color: #fff;
+    border: 1px solid transparent;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    background-color: var(--accent);
 }
 
 /*About section*/
@@ -79,13 +131,16 @@
 
 .what_card {
     width: 100%;
+    padding: 30px;
+    text-align: center;
+
     padding-bottom: 20px;
-    border: 1px solid #32453a;
+    border: 1px solid #282828;
     border-radius: 15px;
     width: 700px;
     display: block;
     color: #fff;
-    background-color: #121212;
+    background-color: var(--main);
     transition: background-color 0.3s ease;
 }
 .what_card:hover {
@@ -105,15 +160,17 @@ h2 {
     align-items: center;
 }
 .about__card {
+    margin-top: 25px;
+    margin-bottom: 25px;
     width: 15%;
     margin-right: 15px;
-    padding: 15px;
-    border: 1px solid #32453a;
+    padding: 25px;
+    border: 1px solid #282828;
     border-radius: 10px;
     text-align: center;
     width: 200px;
     height: 200px;
-    background-color: #121212;
+    background-color: #var(--main);
     transition: background-color 0.3s ease;
 }
 .about__card:hover {
@@ -129,20 +186,12 @@ h2 {
     margin-top: 25px;
     margin-bottom: 25px;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 .signup_card button {
-    border: 1px solid #32453a;
-    font-weight: bold;
-    border-radius: 15px;
     text-align: center;
     width: 250px;
-    background-color: #121212;
     transition: background-color 0.3s ease;
-}
-.signup_card button:hover {
-    background-color: #282828;
-    border-color: #282828;
+    margin-left: 20px;
 }

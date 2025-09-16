@@ -7,7 +7,7 @@ function About() {
         "Trackvestment helps you avoid exceeding your TFSA contribution limit.",
     },
     {
-      title: "UnderContribute",
+      title: "Undercontribute",
       description:
         "Easily track your unused TFSA contribution room from previous years.",
     },

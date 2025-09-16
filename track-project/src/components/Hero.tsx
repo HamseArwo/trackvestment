@@ -5,9 +5,14 @@ function Hero() {
   return (
     <div className="hero">
       <div className="hero-text">
-        <h2>Welcome to</h2>
+        <h2>WELCOME TO</h2>
         <h1>Trackvestment</h1>
-        <p>Track your investments and stay on top of your finances.</p>
+        <h2>Track your investments and stay on top of your finances.</h2>
+        <div className="hero-btn">
+          <button>Sign Up Now</button>
+
+          <button className="learn-btn">Learn More</button>
+        </div>
       </div>
       <div className="hero-image">
         <img src={HeroImage} alt="Hero Image" />
