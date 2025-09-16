@@ -1,3 +1,10 @@
+* {
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
 .highlight {
     color: #32453a;
     font-weight: bold;
@@ -65,14 +72,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: 100vw;
     padding: 20px;
     margin-bottom: 50px;
 }
 
 .what_card {
     width: 100%;
-    padding: 20px;
+    padding-bottom: 20px;
     border: 1px solid #32453a;
     border-radius: 15px;
     width: 700px;
