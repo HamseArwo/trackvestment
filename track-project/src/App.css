@@ -40,7 +40,7 @@ button:hover {
 }
 .nav-bar {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     width: 50%;
     padding: 15px;
@@ -73,7 +73,7 @@ button:hover {
 /*Hero Section*/
 .hero {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     /*align-items: center;*/
     height: 100vh;
     width: 100%;
@@ -97,6 +97,35 @@ button:hover {
 }
 .hero-text {
     padding-top: 125px;
+    width: 60%;
+}
+.hero-items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 50%;
+    gap: 10px;
+    margin-top: 20px;
+}
+.hero-item {
+    width: 45%;
+    display: flex;
+    margin-bottom: 10px;
+    padding: 20px;
+    background-color: #282828;
+    border-radius: 5px;
+    border: 1px solid var(--main);
+    /*margin-right: px;*/
+    transition: border background-color ease-in 1s;
+}
+.hero-item img {
+    width: 45px;
+    height: 45px;
+}
+.hero-item p {
+    font-weight: bold;
+    font-size: 18px;
+    margin-left: 20px;
 }
 .hero-btn {
     display: flex;
@@ -117,6 +146,10 @@ button:hover {
     padding: 0.6em 1.2em;
     font-size: 1em;
     background-color: var(--accent);
+}
+.hero-item:hover {
+    background-color: var(--main);
+    border-color: #282828;
 }
 
 /*About section*/
@@ -170,7 +203,7 @@ h2 {
     text-align: center;
     width: 200px;
     height: 200px;
-    background-color: #var(--main);
+    background-color: var(--main);
     transition: background-color 0.3s ease;
 }
 .about__card:hover {
