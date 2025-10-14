@@ -8,6 +8,7 @@
 :root {
     --accent: #0cc95b;
     --main: #121212;
+    --accent2: #282828;
 }
 
 button {
@@ -153,7 +154,7 @@ button:hover {
 }
 
 /*About section*/
-.what_container {
+.what-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -162,7 +163,7 @@ button:hover {
     margin-bottom: 50px;
 }
 
-.what_card {
+.what-card {
     width: 100%;
     padding: 30px;
     text-align: center;
@@ -176,23 +177,23 @@ button:hover {
     background-color: var(--main);
     transition: background-color 0.3s ease;
 }
-.what_card:hover {
+.what-card:hover {
     background-color: #282828;
     border-color: #282828;
 }
 
 .about h1,
-h2 {
+.about h2 {
     text-align: center;
 }
 
-.about_content {
+.about-content {
     display: flex;
     justify-content: center;
     width: 100%;
     align-items: center;
 }
-.about__card {
+.about-card {
     margin-top: 25px;
     margin-bottom: 25px;
     width: 15%;
@@ -206,25 +207,139 @@ h2 {
     background-color: var(--main);
     transition: background-color 0.3s ease;
 }
-.about__card:hover {
+.about-card:hover {
     background-color: #282828;
     border-color: #282828;
 }
-.about .about__card h2 {
+.about .about-card h2 {
     font-weight: bold;
     margin: 0px;
 }
 
-.signup_card {
+.signup-card {
     margin-top: 25px;
     margin-bottom: 25px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.signup_card button {
+.signup-card button {
     text-align: center;
     width: 250px;
     transition: background-color 0.3s ease;
     margin-left: 20px;
+}
+
+/*Dashboard*/
+.dashboard {
+    display: flex;
+}
+.dashboard-content {
+    margin-top: 40px;
+
+    margin-left: 50px;
+    margin-right: 50px;
+    width: 100%;
+}
+.subheader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.icon {
+    font-size: 23px;
+    font-weight: lighter;
+}
+.subheader {
+    margin-top: 40px;
+}
+.subheader h2 {
+    font-size: 32px;
+    font-weight: bold;
+}
+.create-btn {
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.create-btn img {
+    margin-right: 10px;
+}
+
+/*SideBar*/
+.sidebar {
+    background-color: var(--accent2);
+    width: 274px;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+}
+.sidebar-column {
+    margin-left: 20px;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.sidebar-column-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+}
+
+/*Dashboard grid*/
+.account-cards {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.account-card {
+    background-color: var(--accent2);
+    border-radius: 10px;
+    color: #fff;
+    padding: 40px;
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+.account-card h2 {
+    font-weight: bold;
+    font-size: 40px;
+    margin: 0px;
+}
+
+/*Tables */
+.table-section {
+    width: 80%;
+    margin: auto;
+    margin-top: 40px;
+
+    color: var(--accent);
+    font-weight: bold;
+}
+
+.table-section table {
+    width: 100%;
+    margin-top: 40px;
+    border-collapse: collapse;
+}
+.table-section th,
+.table-section td {
+    padding: 10px;
+    border: 1px solid var(--accent2);
+}
+.table-section th {
+    background-color: var(--accent2);
+    color: #fff;
+}
+.input-cell {
+    width: 50%;
 }

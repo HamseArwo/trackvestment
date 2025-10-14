@@ -24,8 +24,8 @@ function About() {
 
   return (
     <div className="about" id="about">
-      <div className="what_container">
-        <div className="what_card">
+      <div className="what-container">
+        <div className="what-card">
           <h1>
             What is <span className="highlight">Trackvestment?</span>
           </h1>
@@ -46,15 +46,15 @@ function About() {
         have to…
       </h2>
 
-      <div className="about_content">
+      <div className="about-content">
         {aboutCards.map((card) => (
-          <div className="about__card">
+          <div className="about-card">
             <h3>{card.title}</h3>
             <p>{card.description}</p>
           </div>
         ))}
       </div>
-      <div className="signup_card">
+      <div className="signup-card">
         <h2>
           So What
           <span className="highlight"> Are You Waiting For?</span>
