@@ -7,6 +7,8 @@ import HomePage from "./pages/HomePage.tsx";
 import DashboardPage from "./pages/DashboardPage.tsx";
 import AccountPage from "./pages/AccountPage.tsx";
 import SalaryPage from "./pages/SalaryPage.tsx";
+import LoginPage from "./pages/LoginPage.tsx";
+import SignupPage from "./pages/SignupPage.tsx";
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -18,8 +20,10 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/dashboard" element={<DashboardPage />} />
-          <Route path="/account" element={<AccountPage />} />
+          <Route path="/account/:id" element={<AccountPage />} />
           <Route path="/salary" element={<SalaryPage />} />
+          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/login" element={<LoginPage />} />
         </Routes>
       </Router>
     </>

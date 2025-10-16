@@ -1,45 +1,72 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 interface SalaryRow {
   id: number;
   Year: string;
   Salary: number;
   Contributions?: number;
-  Limit?: number;
+  accountId?: number;
 }
 interface ContributionsRow {
   id: number;
   Year: string;
   Contributions: number;
-  Limit: number;
+  accountId: number;
   Salary?: number;
 }
 type TableRow = SalaryRow | ContributionsRow;
 interface TableProps {
   tableType: 0 | 1;
+  parentId: number;
 }
 
-function Table({ tableType }: TableProps) {
-  // Step 1: The table data
+function Table({ tableType, parentId }: TableProps) {
+  const rowsList: TableRow[] = [];
   //
   //
-  //
+  useEffect(() => {
+    let ignore = false;
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:8080/accounts/contribution/${parentId}`,
+          {
+            credentials: "include",
+          },
+        );
+        if (!ignore) {
+          const data = await response.json();
+          // console.log(data.Contributions[0]);
+          for (const row of data.Contributions) {
+            const fetchedRow: ContributionsRow = {
+              id: row.id,
+              accountId: row.account_id,
+              Year: row.year,
+              Contributions: row.amount,
+            };
+            rowsList.push(fetchedRow);
+          }
+          setRows(rowsList);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+
+    return () => {
+      ignore = !ignore;
+    };
+  }, []);
+
   let columns: string[];
-  let rowsFormat: TableRow[];
+  // let rowsFormat: TableRow[];
   if (tableType === 0) {
     columns = ["Year", "Salary"];
-    rowsFormat = [
-      { id: 1, Year: "John", Salary: 25 },
-      { id: 2, Year: "Mary", Salary: 30 },
-    ];
   } else {
-    columns = ["Year", "Contributions", "Limit"];
-    rowsFormat = [
-      { id: 1, Year: "John", Contributions: 25, Limit: 100 },
-      { id: 2, Year: "Mary", Contributions: 30, Limit: 150 },
-    ];
+    columns = ["Year", "Contributions"];
   }
 
-  const [rows, setRows] = useState<TableRow[]>(rowsFormat);
+  const [rows, setRows] = useState<TableRow[]>([]);
 
   // Step 2: Keep track of which row is being edited
   const [editRowId, setEditRowId] = useState<number | null>(null);
@@ -56,7 +83,6 @@ function Table({ tableType }: TableProps) {
       setEditFormData({
         Year: row.Year,
         Contributions: row.Contributions,
-        Limit: row.Limit,
       });
     }
   };
@@ -94,14 +120,14 @@ function Table({ tableType }: TableProps) {
     } else {
       const newRow = {
         id: Date.now(),
+        accountId: parentId,
         Year: "New Person",
         Contributions: 0,
-        Limit: 0,
       };
       setRows([...rows, newRow]);
     }
   };
-
+  console.log(rows, rows.length);
   return (
     <div>
       <section className="table-section">

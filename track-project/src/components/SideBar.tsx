@@ -8,14 +8,17 @@ function SideBar() {
     {
       title: "Dashboard",
       icon: Dashboard,
+      link: "/#dashboard",
     },
     {
       title: "Salary",
       icon: Salary,
+      link: "/#salary",
     },
     {
       title: "Logout",
       icon: Logout,
+      link: "/#logout",
     },
   ];
   return (
@@ -27,7 +30,9 @@ function SideBar() {
         {sideElements.map((element) => (
           <div className="sidebar-column-item" key={element.title}>
             <img src={element.icon} alt={element.title} />
-            <span>{element.title}</span>
+            <a href={element.link}>
+              <span>{element.title}</span>
+            </a>
           </div>
         ))}
       </div>
