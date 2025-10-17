@@ -389,6 +389,7 @@ button:hover {
     width: 100%;
     margin-top: 40px;
     border-collapse: collapse;
+    border: 1px solid var(--accent2);
 }
 .table-section th,
 .table-section td {
@@ -400,7 +401,10 @@ button:hover {
     color: #fff;
 }
 .input-cell {
-    width: 50%;
+    /*width: 50%;*/
+    padding: 10px;
+    border: 1px solid var(--accent2);
+    border-radius: 5px;
 }
 
 /*Signup Pages*/

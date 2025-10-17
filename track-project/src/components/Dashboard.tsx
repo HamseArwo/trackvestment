@@ -24,23 +24,27 @@ function Dashboard() {
     console.log(ignore);
 
     const fetchData = async () => {
-      const response = await fetch("http://localhost:8080/accounts", {
-        credentials: "include",
-      });
-      if (!ignore) {
-        const data = await response.json();
-        for (const fetchedAccount of data.accounts) {
-          // console.log(account.id);
-          const accountGiven: accounts = {
-            id: fetchedAccount.id,
-            name: fetchedAccount.name,
-            account_type_id: fetchedAccount.account_type_id,
-            total: fetchedAccount.total,
-            child_year: fetchedAccount.child_year,
-          };
-          accountList.push(accountGiven);
+      try {
+        const response = await fetch("http://localhost:8080/accounts", {
+          credentials: "include",
+        });
+        if (!ignore) {
+          const data = await response.json();
+          for (const fetchedAccount of data.accounts) {
+            // console.log(account.id);
+            const accountGiven: accounts = {
+              id: fetchedAccount.id,
+              name: fetchedAccount.name,
+              account_type_id: fetchedAccount.account_type_id,
+              total: fetchedAccount.total,
+              child_year: fetchedAccount.child_year,
+            };
+            accountList.push(accountGiven);
+          }
+          setAccount(accountList);
         }
-        setAccount(accountList);
+      } catch (error) {
+        console.error("Error fetching data:", error);
       }
     };
     fetchData();
@@ -203,7 +207,9 @@ function Dashboard() {
                 <p>Balance: ${card.total}</p>
                 <button
                   className="edit-btn"
-                  onClick={() => navigate(`/account/${card.id}`)}
+                  onClick={() =>
+                    navigate(`/account/${card.account_type_id}/${card.id}`)
+                  }
                 >
                   <span> Edit Account </span>
                 </button>

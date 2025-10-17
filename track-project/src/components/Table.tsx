@@ -1,29 +1,46 @@
 import React, { useEffect, useState } from "react";
 interface SalaryRow {
   id: number;
-  Year: string;
+  year: number;
   Salary: number;
-  Contributions?: number;
-  accountId?: number;
+  amount?: number;
+  account_id?: number;
+  user_id?: number;
 }
 interface ContributionsRow {
   id: number;
-  Year: string;
-  Contributions: number;
-  accountId: number;
+  year: number;
+  amount: number;
+  account_id: number;
+  user_id: number;
   Salary?: number;
+  limit?: number;
+}
+interface limitRow {
+  year: number;
+  limit: number;
+}
+interface cumulativeRow {
+  year: number;
+  amount: number;
+  overContribution: number;
 }
 type TableRow = SalaryRow | ContributionsRow;
 interface TableProps {
   tableType: 0 | 1;
   parentId: number;
+  account_type_id: number;
 }
 
-function Table({ tableType, parentId }: TableProps) {
-  const rowsList: TableRow[] = [];
+function Table({ tableType, parentId, account_type_id }: TableProps) {
+  const [recall, setRecall] = useState<boolean>(false);
+
   //
   //
   useEffect(() => {
+    const rowsList: TableRow[] = [];
+    const limitList: limitRow[] = [];
+    const cumulativeList: cumulativeRow[] = [];
     let ignore = false;
     const fetchData = async () => {
       try {
@@ -39,13 +56,46 @@ function Table({ tableType, parentId }: TableProps) {
           for (const row of data.Contributions) {
             const fetchedRow: ContributionsRow = {
               id: row.id,
-              accountId: row.account_id,
-              Year: row.year,
-              Contributions: row.amount,
+              account_id: row.account_id,
+              user_id: row.user_id,
+              year: row.year,
+              amount: row.amount,
             };
             rowsList.push(fetchedRow);
           }
           setRows(rowsList);
+          if (account_type_id === 1) {
+            let response = await fetch(`http://localhost:8080/accounts/limit`, {
+              credentials: "include",
+            });
+
+            const data = await response.json();
+            for (const row of data.ContributionLimit) {
+              const fetchedLimit: limitRow = {
+                year: row.year,
+                limit: row.amount,
+              };
+              limitList.push(fetchedLimit);
+            }
+            setLimit(limitList);
+            response = await fetch(
+              `http://localhost:8080/accounts/culumative/${parentId}/${account_type_id}`,
+              {
+                credentials: "include",
+              },
+            );
+            const cumulativeData = await response.json();
+            for (const row of cumulativeData.CumulativeContributions) {
+              const fetchedCumulative: cumulativeRow = {
+                year: row.year,
+                amount: row.amount,
+                overContribution: row.over_contribution_amount,
+              };
+              cumulativeList.push(fetchedCumulative);
+            }
+            console.log(cumulativeList);
+            setCumulative(cumulativeList);
+          }
         }
       } catch (error) {
         console.error(error);
@@ -56,17 +106,26 @@ function Table({ tableType, parentId }: TableProps) {
     return () => {
       ignore = !ignore;
     };
-  }, []);
+  }, [recall]);
 
   let columns: string[];
   // let rowsFormat: TableRow[];
   if (tableType === 0) {
     columns = ["Year", "Salary"];
   } else {
-    columns = ["Year", "Contributions"];
+    columns = [
+      "year",
+      "amount",
+      "Yearly Limit",
+      "Left Over Room",
+      "Over The Limit",
+      "Action",
+    ];
   }
 
   const [rows, setRows] = useState<TableRow[]>([]);
+  const [limits, setLimit] = useState<limitRow[]>([]);
+  const [cumulative, setCumulative] = useState<cumulativeRow[]>([]);
 
   // Step 2: Keep track of which row is being edited
   const [editRowId, setEditRowId] = useState<number | null>(null);
@@ -78,11 +137,14 @@ function Table({ tableType, parentId }: TableProps) {
   const handleEditClick = (row: TableRow) => {
     setEditRowId(row.id);
     if (tableType === 0) {
-      setEditFormData({ Year: row.Year, Salary: row.Salary });
+      setEditFormData({ year: Number(row.year), Salary: row.Salary });
     } else if (tableType === 1) {
       setEditFormData({
-        Year: row.Year,
-        Contributions: row.Contributions,
+        id: row.id,
+        year: Number(row.year),
+        amount: row.amount,
+        account_id: row.account_id,
+        user_id: row.user_id,
       });
     }
   };
@@ -90,44 +152,29 @@ function Table({ tableType, parentId }: TableProps) {
   // Step 5: Handle input change while editing
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setEditFormData({ ...editFormData, [name]: value });
+    setEditFormData({ ...editFormData, [name]: Number(value) });
   };
 
   // Step 6: Save the edited data
-  const handleSave = (id: number) => {
+  const handleSave = async (id: number) => {
+    await fetch(`http://localhost:8080/accounts/contribution/${parentId}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(editFormData),
+    });
+
     const updatedRows = rows.map((row) =>
       row.id === id ? { ...row, ...editFormData } : row,
     );
     setRows(updatedRows);
     setEditRowId(null);
+    setRecall(!recall);
   };
 
-  // Step 7: Delete a row
-  const handleDelete = (id: number) => {
-    const updatedRows = rows.filter((row) => row.id !== id);
-    setRows(updatedRows);
-  };
-
-  // Step 8: Add a new row
-  const handleAddRow = () => {
-    if (tableType === 0) {
-      const newRow = {
-        id: Date.now(),
-        Year: "New Person",
-        Salary: 0,
-      };
-      setRows([...rows, newRow]);
-    } else {
-      const newRow = {
-        id: Date.now(),
-        accountId: parentId,
-        Year: "New Person",
-        Contributions: 0,
-      };
-      setRows([...rows, newRow]);
-    }
-  };
-  console.log(rows, rows.length);
+  console.log(cumulative);
   return (
     <div>
       <section className="table-section">
@@ -137,10 +184,8 @@ function Table({ tableType, parentId }: TableProps) {
           <thead>
             <tr>
               {columns.map((column) => (
-                <th> {column}</th>
+                <th> {column.toUpperCase()}</th>
               ))}
-
-              <th>Action</th>
             </tr>
           </thead>
 
@@ -149,16 +194,31 @@ function Table({ tableType, parentId }: TableProps) {
               <tr key={row.id}>
                 {editRowId === row.id ? (
                   <>
-                    {columns.map((column) => (
-                      <td className="input-cell">
-                        <input
-                          name={column}
-                          value={editFormData[column as keyof TableRow]}
-                          onChange={handleChange}
-                        />
-                      </td>
-                    ))}
-
+                    <td>{row.year}</td>
+                    <td className="input-cell">
+                      <input
+                        className="input-cell"
+                        type="number"
+                        name="amount"
+                        value={editFormData.amount}
+                        onChange={handleChange}
+                      />
+                    </td>
+                    {limits.map((limit) => {
+                      if (limit.year == row.year) {
+                        return <td>{limit.limit}</td>;
+                      }
+                    })}
+                    {cumulative.map((cumulative) => {
+                      if (cumulative.year == row.year) {
+                        return (
+                          <>
+                            <td>{cumulative.amount}</td>
+                            <td>{cumulative.overContribution}</td>
+                          </>
+                        );
+                      }
+                    })}
                     <td>
                       <button onClick={() => handleSave(row.id)}>Save</button>
                       <button onClick={() => setEditRowId(null)}>Cancel</button>
@@ -166,17 +226,26 @@ function Table({ tableType, parentId }: TableProps) {
                   </>
                 ) : (
                   <>
-                    {columns.map((column) => (
-                      <td className="input-cell">
-                        {row[column as keyof TableRow]}
-                      </td>
-                    ))}
+                    <td>{row.year}</td>
+                    <td>{row.amount}</td>
+                    {limits.map((limit) => {
+                      if (limit.year == row.year) {
+                        return <td>{limit.limit}</td>;
+                      }
+                    })}
+                    {cumulative.map((cumulative) => {
+                      if (cumulative.year == row.year) {
+                        return (
+                          <>
+                            <td>{cumulative.amount}</td>
+                            <td>{cumulative.overContribution}</td>
+                          </>
+                        );
+                      }
+                    })}
 
                     <td>
                       <button onClick={() => handleEditClick(row)}>Edit</button>
-                      <button onClick={() => handleDelete(row.id)}>
-                        Delete
-                      </button>
                     </td>
                   </>
                 )}
@@ -184,7 +253,6 @@ function Table({ tableType, parentId }: TableProps) {
             ))}
           </tbody>
         </table>
-        <button onClick={handleAddRow}>Add Row</button>
       </section>
     </div>
   );
