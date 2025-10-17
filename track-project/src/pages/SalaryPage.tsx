@@ -4,7 +4,7 @@ function SalaryPage() {
   return (
     <>
       {/*<SideBar />*/}
-      <Table tableType={0} />
+      <Table tableType={0} parentId={0} account_type_id={0} />
     </>
   );
 }
