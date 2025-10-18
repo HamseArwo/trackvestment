@@ -77,7 +77,6 @@ function Table({ tableType, parentId, account_type_id }: TableProps) {
           );
           if (!ignore) {
             const data = await response.json();
-            // console.log(data.Contributions[0]);
             for (const row of data.Contributions) {
               const fetchedRow: ContributionsRow = {
                 id: row.id,
@@ -145,7 +144,6 @@ function Table({ tableType, parentId, account_type_id }: TableProps) {
                 };
                 cumulativeList.push(fetchedCumulative);
               }
-              console.log(cumulativeList);
               setCumulative(cumulativeList);
             } else if (account_type_id == 2) {
               const response = await fetch(
@@ -179,7 +177,7 @@ function Table({ tableType, parentId, account_type_id }: TableProps) {
     return () => {
       ignore = !ignore;
     };
-  }, [recall]);
+  }, [recall, tableType, account_type_id, parentId]);
 
   let columns: string[];
   if (account_type_id === 1 || account_type_id === 3) {
@@ -263,7 +261,6 @@ function Table({ tableType, parentId, account_type_id }: TableProps) {
     setRecall(!recall);
   };
 
-  console.log(rows);
   return (
     <section className="table-section">
       {tableType == 1 && <h1>Your Contributions</h1>}

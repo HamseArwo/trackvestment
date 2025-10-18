@@ -1,11 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Validate from "../components/Validate";
 interface login {
   email: string;
   password: string;
 }
 function LoginPage() {
   const navigate = useNavigate();
+  useEffect(() => {
+    const loggedinCheck = async () => {
+      const loggedin = await Validate();
+      if (loggedin) {
+        navigate("/dashboard");
+      }
+    };
+    loggedinCheck();
+  }, [navigate]);
   const [form, setForm] = useState<login>({
     email: "",
     password: "",
@@ -17,7 +27,6 @@ function LoginPage() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // console.log(form);
 
     try {
       const res = await fetch("http://localhost:8080/login", {

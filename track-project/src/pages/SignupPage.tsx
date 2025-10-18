@@ -1,4 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import Validate from "../components/Validate";
+
 interface signup {
   name: string;
   email: string;
@@ -7,6 +10,16 @@ interface signup {
 }
 
 function SignupPage() {
+  const navigate = useNavigate();
+  useEffect(() => {
+    const loggedinCheck = async () => {
+      const loggedin = await Validate();
+      if (loggedin) {
+        navigate("/dashboard");
+      }
+    };
+    loggedinCheck();
+  }, [navigate]);
   const [form, setForm] = useState<signup>({
     name: "",
     email: "",
@@ -33,13 +46,15 @@ function SignupPage() {
         },
         body: JSON.stringify(form),
       });
-      setMessage(await res.text());
+      if (res.status === 200) {
+        navigate("/login");
+      } else {
+        setMessage("Error Signing up");
+      }
     } catch (error) {
       console.log(error);
       setMessage("Error Signing up");
     }
-
-    // console.log(form);
   };
 
   return (

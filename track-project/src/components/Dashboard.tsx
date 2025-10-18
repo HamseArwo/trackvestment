@@ -18,10 +18,10 @@ interface accountForm {
 }
 function Dashboard() {
   const accountTypes = ["admin", "TFSA", "RESP", "RRSP"];
-  const accountList: accounts[] = [];
   useEffect(() => {
+    const accountList: accounts[] = [];
+
     let ignore = false;
-    console.log(ignore);
 
     const fetchData = async () => {
       try {
@@ -31,7 +31,6 @@ function Dashboard() {
         if (!ignore) {
           const data = await response.json();
           for (const fetchedAccount of data.accounts) {
-            // console.log(account.id);
             const accountGiven: accounts = {
               id: fetchedAccount.id,
               name: fetchedAccount.name,
@@ -80,7 +79,6 @@ function Dashboard() {
       total: 0,
       child_year: form.child_year,
     };
-    console.log(newAccount);
 
     await fetch(`http://localhost:8080/accounts`, {
       method: "POST",
@@ -96,7 +94,6 @@ function Dashboard() {
   };
 
   const deleteAccount = async (id: number) => {
-    // console.log(account);
     await fetch(`http://localhost:8080/accounts/${id}`, {
       method: "DELETE",
       headers: {
@@ -109,7 +106,6 @@ function Dashboard() {
   };
   const toggleCard = () => {
     setOpen(!open);
-    console.log("Toggle Card");
   };
 
   return (

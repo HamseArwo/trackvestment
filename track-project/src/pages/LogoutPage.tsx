@@ -4,12 +4,14 @@ export default function LogoutPage() {
   useEffect(() => {
     const Logout = async () => {
       try {
-        await fetch("http://localhost:8080/lsdogout", {
+        await fetch("http://localhost:8080/logout", {
           method: "DELETE",
+          credentials: "include",
           headers: {
             "Content-Type": "application/json",
           },
         });
+        localStorage.removeItem("token");
       } catch (error) {
         setMessage("Failed to log out, Error " + error);
       }
