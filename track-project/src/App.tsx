@@ -9,7 +9,8 @@ import AccountPage from "./pages/AccountPage.tsx";
 import SalaryPage from "./pages/SalaryPage.tsx";
 import LoginPage from "./pages/LoginPage.tsx";
 import SignupPage from "./pages/SignupPage.tsx";
-import { HashRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import LogoutPage from "./pages/LogoutPage.tsx";
 
 function App() {
   // const [count, setCount] = useState(0);
@@ -24,6 +25,7 @@ function App() {
           <Route path="/salary" element={<SalaryPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/logout" element={<LogoutPage />} />
         </Routes>
       </Router>
     </>

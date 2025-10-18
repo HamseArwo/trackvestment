@@ -8,17 +8,17 @@ function SideBar() {
     {
       title: "Dashboard",
       icon: Dashboard,
-      link: "/#dashboard",
+      link: "/dashboard",
     },
     {
       title: "Salary",
       icon: Salary,
-      link: "/#salary",
+      link: "/salary",
     },
     {
       title: "Logout",
       icon: Logout,
-      link: "/#logout",
+      link: "/logout",
     },
   ];
   return (

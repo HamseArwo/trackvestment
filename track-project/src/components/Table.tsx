@@ -182,7 +182,6 @@ function Table({ tableType, parentId, account_type_id }: TableProps) {
   }, [recall]);
 
   let columns: string[];
-  // let rowsFormat: TableRow[];
   if (account_type_id === 1 || account_type_id === 3) {
     columns = [
       "year",
@@ -203,13 +202,10 @@ function Table({ tableType, parentId, account_type_id }: TableProps) {
   const [cumulative, setCumulative] = useState<cumulativeRow[]>([]);
   const [grants, setGrant] = useState<grantRow[]>([]);
 
-  // Step 2: Keep track of which row is being edited
   const [editRowId, setEditRowId] = useState<number | null>(null);
 
-  // Step 3: Temporary data while editing
   const [editFormData, setEditFormData] = useState<Partial<TableRow>>({});
 
-  // Step 4: Handle edit click
   const handleEditClick = (row: TableRow) => {
     setEditRowId(row.id);
     if (tableType === 0) {
@@ -225,13 +221,11 @@ function Table({ tableType, parentId, account_type_id }: TableProps) {
     }
   };
 
-  // Step 5: Handle input change while editing
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setEditFormData({ ...editFormData, [name]: Number(value) });
   };
 
-  // Step 6: Save the edited data
   const handleSave = async (id: number) => {
     if (tableType == 1) {
       try {
@@ -271,10 +265,10 @@ function Table({ tableType, parentId, account_type_id }: TableProps) {
 
   console.log(rows);
   return (
-    <div>
-      <section className="table-section">
-        <h1>Your Contributions</h1>
-
+    <section className="table-section">
+      {tableType == 1 && <h1>Your Contributions</h1>}
+      {tableType == 0 && <h1>Your Salary History</h1>}
+      <div className="table-div">
         <table border={1} cellPadding="10">
           <thead>
             <tr>
@@ -322,7 +316,12 @@ function Table({ tableType, parentId, account_type_id }: TableProps) {
                     })}
                     <td>
                       <button onClick={() => handleSave(row.id)}>Save</button>
-                      <button onClick={() => setEditRowId(null)}>Cancel</button>
+                      <button
+                        className="cancel-btn"
+                        onClick={() => setEditRowId(null)}
+                      >
+                        Cancel
+                      </button>
                     </td>
                   </>
                 ) : (
@@ -359,13 +358,19 @@ function Table({ tableType, parentId, account_type_id }: TableProps) {
             ))}
           </tbody>
         </table>
-        <h2> Total Contributions: ${balance}</h2>
-        {account_type_id == 2 && <h2> Remaining Room: ${50000 - balance}</h2>}
-        {account_type_id == 2 && balance > 50000 && (
-          <h2>You are over your contribution limit by ${balance - 50000}</h2>
-        )}
-      </section>
-    </div>
+      </div>
+      {tableType == 1 ? (
+        <>
+          <h2> Total Contributions: ${balance}</h2>
+          {account_type_id == 2 && <h2> Remaining Room: ${50000 - balance}</h2>}
+          {account_type_id == 2 && balance > 50000 && (
+            <h2>You are over your contribution limit by ${balance - 50000}</h2>
+          )}
+        </>
+      ) : (
+        <h2> Total Salary : ${balance}</h2>
+      )}
+    </section>
   );
 }
 

@@ -25,7 +25,7 @@ function Dashboard() {
 
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:8080/accounts", {
+        let response = await fetch("http://localhost:8080/accounts", {
           credentials: "include",
         });
         if (!ignore) {
@@ -42,6 +42,14 @@ function Dashboard() {
             accountList.push(accountGiven);
           }
           setAccount(accountList);
+          response = await fetch("http://localhost:8080/user", {
+            credentials: "include",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+          const userResponse = await response.json();
+          setUser(userResponse.name);
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -54,6 +62,7 @@ function Dashboard() {
   }, []);
 
   const [account, setAccount] = useState<accounts[]>([]);
+  const [user, setUser] = useState<string>("");
   const [open, setOpen] = useState(false);
   const [form, setForm] = useState<accountForm>({
     name: "",
@@ -177,9 +186,9 @@ function Dashboard() {
 
       <div className="dashboard-content">
         <div className="dash-header">
-          <h1> Welcome Back</h1>
+          <h1> Welcome Back,</h1>
           <h1>
-            <span className="highlight">John Doe</span>
+            <span className="highlight">{user}</span>
           </h1>
           <div className="subheader">
             <h2> Accounts</h2>

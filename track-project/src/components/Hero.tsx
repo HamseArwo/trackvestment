@@ -4,6 +4,7 @@ import futureLogo from "../assets/long-term.png";
 import manageLogo from "../assets/bar-chart.png";
 import informLogo from "../assets/alarm.png";
 import "../App.css";
+import { useNavigate } from "react-router-dom";
 
 function Hero() {
   const heroItems = [
@@ -24,6 +25,7 @@ function Hero() {
       img: informLogo,
     },
   ];
+  const navigate = useNavigate();
 
   return (
     <div className="hero">
@@ -40,9 +42,13 @@ function Hero() {
           ))}
         </div>
         <div className="hero-btn">
-          <button>Sign Up Now</button>
+          <button className="sign-btn" onClick={() => navigate("/signup")}>
+            Sign Up Now
+          </button>
 
-          <button className="learn-btn">Learn More</button>
+          <button onClick={() => navigate("#about")} className="learn-btn">
+            <a href="#about">Learn More</a>
+          </button>
         </div>
       </div>
       <div className="hero-image">

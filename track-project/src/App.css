@@ -134,15 +134,33 @@ button:hover {
     margin-top: 15px;
     /*justify-content: space-between;*/
 }
-.learn-btn {
-    margin-left: 15px;
+.sign-btn {
+    margin-right: 15px;
+}
+.learn-btn,
+.delete-btn,
+.cancel-btn {
     background-color: var(--main);
     color: var(--accent);
     border-color: var(--accent);
+    transition:
+        border,
+        background-color,
+        color,
+        ease-in 0.25s;
+}
+.learn-btn a {
+    color: var(--accent);
 }
 
-.learn-btn:hover {
-    color: #fff;
+.learn-btn:hover,
+.delete-btn:hover,
+.cancel-btn:hover {
+    a,
+    span {
+        color: #fff;
+    }
+
     border: 1px solid transparent;
     padding: 0.6em 1.2em;
     font-size: 1em;
@@ -231,7 +249,8 @@ button:hover {
 }
 
 /*Dashboard*/
-.dashboard {
+.dashboard,
+.table-container {
     display: flex;
 }
 .dashboard-content {
@@ -309,6 +328,15 @@ button:hover {
     flex-direction: column;
     align-items: center;
     gap: 15px;
+    border: 1px solid var(--accent2);
+    transition:
+        border,
+        background-color,
+        ease-in 0.33s;
+}
+.account-card:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-color: var(--accent);
 }
 .account-card h2 {
     font-weight: bold;
@@ -440,4 +468,144 @@ button:hover {
     padding: 10px;
     border: 1px solid var(--accent2);
     border-radius: 5px;
+}
+.logout-message {
+    text-align: center;
+    font-weight: bold;
+    color: var(--accent);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+}
+
+@media only screen and (max-width: 1080px) {
+    /*Hero*/
+    .hero {
+        flex-direction: column;
+        margin-bottom: 10px;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+    .hero-text {
+        display: flex;
+        width: 100%;
+        text-align: center;
+        flex-direction: column;
+        align-items: center;
+    }
+    .hero-items {
+        width: 70%;
+    }
+    .hero-text h2 {
+        text-align: center;
+    }
+    .hero-btn {
+        justify-content: center;
+    }
+    /*Dashboard*/
+    .dashboard,
+    .table-container {
+        flex-direction: column;
+    }
+    .account-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        padding: 15px;
+        width: 100%;
+    }
+    .dashboard-content {
+        margin-top: 25px;
+        margin-left: 0px;
+        margin-right: 0px;
+        display: flex;
+        justify-content: center;
+    }
+    .dash-header {
+        width: 80%;
+    }
+    .sidebar-column {
+        margin-top: 0px;
+    }
+    /*Table*/
+    .input-cell {
+        width: 75%;
+    }
+    .cancel-btn {
+        margin-top: 15px;
+    }
+    .table-div {
+        overflow-x: auto;
+    }
+}
+
+@media only screen and (max-width: 375px) {
+    h1 {
+        font-size: 35px;
+    }
+    h2 {
+        font-size: 20px;
+    }
+    .nav-bar {
+        width: 100%;
+    }
+    .hero h1 {
+        font-size: 50px;
+    }
+    /*.hero h2 {
+        font-size: 25px;
+    }*/
+    .hero-items {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+    }
+    .hero-item {
+        width: 80%;
+    }
+    .hero-image {
+        width: 100%;
+    }
+    .what-container {
+        width: 100%;
+    }
+
+    .what-card {
+        width: 100%;
+    }
+    .about-content {
+        flex-direction: column;
+    }
+
+    .about-card {
+        margin-bottom: 0px;
+        width: 80%;
+        height: 140px;
+    }
+    .signup-card {
+        flex-direction: column;
+    }
+    .signup-card button {
+        margin-top: 10px;
+    }
+
+    /*Dashboard*/
+
+    .account-cards {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media only screen and (max-height: 414px) {
+    .signup {
+        height: 100%;
+    }
+    .overlay-content {
+        height: 100%;
+    }
 }

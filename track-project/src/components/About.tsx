@@ -1,4 +1,5 @@
 import "../App.css";
+import { useNavigate } from "react-router-dom";
 function About() {
   const aboutCards = [
     {
@@ -21,7 +22,7 @@ function About() {
         "Keep track of total RRSP contributions never exceeding cap.",
     },
   ];
-
+  const navigate = useNavigate();
   return (
     <div className="about" id="about">
       <div className="what-container">
@@ -59,7 +60,7 @@ function About() {
           So What
           <span className="highlight"> Are You Waiting For?</span>
         </h2>
-        <button> Sign Up!</button>
+        <button onClick={() => navigate("/signup")}> Sign Up!</button>
       </div>
     </div>
   );
