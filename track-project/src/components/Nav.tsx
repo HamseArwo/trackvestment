@@ -13,7 +13,7 @@ function Nav() {
             <a href="#about">About</a>
           </li>
           <li>
-            <a href="#signup">Sign up</a>
+            <a href="/signup">Sign up</a>
           </li>
         </ul>
       </nav>
