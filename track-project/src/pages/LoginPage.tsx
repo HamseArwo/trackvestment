@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Validate from "../components/Validate";
+import Validate from "../utils/Validate";
 interface login {
   email: string;
   password: string;

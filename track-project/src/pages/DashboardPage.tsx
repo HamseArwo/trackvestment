@@ -1,5 +1,5 @@
 import Dashboard from "../components/Dashboard";
-import Validate from "../components/Validate";
+import Validate from "../utils/Validate";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 

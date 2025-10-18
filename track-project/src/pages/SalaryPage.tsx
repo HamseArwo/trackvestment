@@ -2,7 +2,7 @@ import Table from "../components/Table";
 import SideBar from "../components/SideBar";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Validate from "../components/Validate";
+import Validate from "../utils/Validate";
 
 function SalaryPage() {
   const navigate = useNavigate();
