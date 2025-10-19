@@ -4,7 +4,7 @@ It’s written to sound like a real developer explaining their project, showing 
 
 ---
 
-# 💰 Trackvestment
+# Trackvestment
 
 Trackvestment is a **full-stack investment tracking application** that helps users monitor their **TFSA, RRSP, and RESP** accounts and stay within their contribution limits.
 
@@ -13,7 +13,7 @@ It was built to explore clean API design, real-time validation, and modern front
 
 ---
 
-## 🌐 Live Overview
+## Overview
 
 * **Frontend:** React + TypeScript
 * **Backend:** Go + Gin + SQLite
