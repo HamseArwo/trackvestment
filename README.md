@@ -68,7 +68,7 @@ The focus was on writing maintainable, strongly typed code and designing a real-
 
 ```bash
 git clone https://github.com/yourusername/trackvestment-frontend.git
-cd trackvestment-frontend
+cd track-project
 ```
 
 ### 2. Install dependencies
@@ -80,11 +80,7 @@ npm install
 ### 3. Connect the backend
 
 Make sure the backend is running locally or hosted somewhere.
-Update your `.env` file to include:
 
-```
-VITE_API_URL=http://localhost:8080
-```
 
 ### 4. Start the development server
 
