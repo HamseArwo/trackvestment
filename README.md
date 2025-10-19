@@ -1,8 +1,4 @@
-Perfect — that helps a lot. Here’s an **authentic, recruiter-focused GitHub README** written for your **full-stack Trackvestment app**, where the **frontend is built with React + TypeScript** and the **backend (in Go + Gin + SQLite)** is linked as a separate repository.
 
-It’s written to sound like a real developer explaining their project, showing both **technical skill and intent** — with a natural tone and no m-dashes.
-
----
 
 # Trackvestment
 
