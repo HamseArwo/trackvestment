@@ -20,7 +20,7 @@ It was built to explore clean API design, real-time validation, and modern front
 * **Architecture:** RESTful API
 * **Auth:** JSON Web Tokens (JWT)
 
- **Backend Repository:** [Trackvestment Backend](https://github.com/yourusername/trackvestment-backend)
+ **Backend Repository:** [Trackvestment Backend](https://github.com/HamseArwo/Canadian_Investment_Tracker)
 
 ---
 
