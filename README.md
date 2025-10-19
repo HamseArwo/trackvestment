@@ -20,20 +20,20 @@ It was built to explore clean API design, real-time validation, and modern front
 * **Architecture:** RESTful API
 * **Auth:** JSON Web Tokens (JWT)
 
-👉 **Backend Repository:** [Trackvestment Backend](https://github.com/yourusername/trackvestment-backend)
+ **Backend Repository:** [Trackvestment Backend](https://github.com/yourusername/trackvestment-backend)
 
 ---
 
-## 💡 Motivation
+##  Motivation
 
-This project started from a simple idea: make it easier for Canadians to **see how close they are to reaching their TFSA, RRSP, and RESP limits**.
+This project started from a simple idea, make it easier for Canadians to  see how close they are to reaching their TFSA, RRSP, and RESP limits.
 I wanted to create something practical that could connect a strong backend API with a clean and intuitive frontend interface.
 
-The focus was on writing maintainable, strongly typed code and designing a real-world flow from **data input to validation and visualization**.
+The focus was on writing maintainable, strongly typed code and designing a real-world flow from  reciving data, validating, and visuzaizng it .
 
 ---
 
-## ⚙️ Tech Stack
+##  Tech Stack
 
 **Frontend**
 
