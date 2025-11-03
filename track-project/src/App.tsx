@@ -9,7 +9,7 @@ import AccountPage from "./pages/AccountPage.tsx";
 import SalaryPage from "./pages/SalaryPage.tsx";
 import LoginPage from "./pages/LoginPage.tsx";
 import SignupPage from "./pages/SignupPage.tsx";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import LogoutPage from "./pages/LogoutPage.tsx";
 
 function App() {
