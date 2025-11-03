@@ -6,6 +6,6 @@ export default defineConfig({
   plugins: [react()],
   base: "/trackvestment/",
   build: {
-    outDir: "dist",
+    outDir: "docs",
   },
 });
