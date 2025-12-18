@@ -32,6 +32,10 @@ I wanted to create something practical that could connect a strong backend API w
 The focus was on writing maintainable, strongly typed code and designing a real-world flow from  reciving data, validating, and visuzaizng it .
 
 ---
+## Live Demo
+https://github.com/user-attachments/assets/885216d8-d6e5-438d-bc76-b19159f180d2
+
+
 
 ##  Tech Stack
 
