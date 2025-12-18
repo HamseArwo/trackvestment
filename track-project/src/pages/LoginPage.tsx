@@ -73,7 +73,7 @@ function LoginPage() {
           />
           <label>
             {" "}
-            Don't have an account? <a href="/#signup">Signup</a>
+            Don't have an account? <a href="/trackvestment/signup">Signup</a>
           </label>
           <button type="submit">Log In</button>
         </form>

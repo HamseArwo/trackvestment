@@ -98,7 +98,7 @@ function SignupPage() {
           />
           <label>
             {" "}
-            Already have an account? <a href="/login">Login</a>
+            Already have an account? <a href="/trackvestment/login">Login</a>
           </label>
           <button type="submit">Sign Up</button>
         </form>
