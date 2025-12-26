@@ -14,11 +14,9 @@ It was built to explore clean API design, real-time validation, and modern front
 * **Frontend:** React + TypeScript
 * **Backend:** Go + Gin + SQLite
 * **Architecture:** RESTful API
-
-https://github.com/user-attachments/assets/885216d8-d6e5-438d-bc76-b19159f180d2
-
-
 * **Auth:** JSON Web Tokens (JWT)
+## Demo
+https://github.com/user-attachments/assets/885216d8-d6e5-438d-bc76-b19159f180d2
 
  **Backend Repository:** [Trackvestment Backend](https://github.com/HamseArwo/Canadian_Investment_Tracker)
 
